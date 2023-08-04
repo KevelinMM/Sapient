@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,86 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
 </head>
+
 <body>
-<!-- <body class="-overlay"> -->
+
+  <!-- < Abrir e fechar o menu com o clique no botão Menu > -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuButton = document.getElementById("menu-button");
+      const menu = document.getElementById("menu");
+
+      function closeMenu() {
+        menu.classList.remove("-active");
+        document.body.classList.remove("-overlay");
+      }
+
+      menuButton.addEventListener("click", function () {
+        menu.classList.toggle("-active");
+        document.body.classList.toggle("-overlay");
+      });
+
+      document.addEventListener("click", function (event) {
+        const target = event.target;
+        if (!menu.contains(target) && target !== menuButton) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
+
+  <!-- <  Play do vídeo ao clicar na imagem de capa > -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const videoCover = document.getElementById("video-cover");
+      const videoPlayer = document.getElementById("video-player");
+
+      videoCover.addEventListener("click", function () {
+        videoPlayer.setAttribute("src", "assets/video/video.mp4");
+        videoPlayer.play();
+        videoCover.classList.add("-inactive");
+      });
+
+      videoPlayer.addEventListener("play", function () {
+        videoCover.classList.add("-inactive");
+      });
+
+      videoPlayer.addEventListener("pause", function () {
+        videoCover.classList.remove("-inactive");
+      });
+    });
+  </script>
+
+  <!-- <  Sistema de sanfona para a lista > -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const accordionItems = document.querySelectorAll(".accordion .item");
+
+      accordionItems.forEach((item) => {
+        const title = item.querySelector(".title");
+        const description = item.querySelector(".description");
+
+        title.addEventListener("click", function () {
+          item.classList.toggle("-active");
+          if (item.classList.contains("-active")) {
+            description.style.maxHeight = description.scrollHeight + "px";
+          } else {
+            description.style.maxHeight = null;
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- <body class="-overlay"> -->
   <div class="wrapper">
     <div class="head">
       <h1>Lorem ipsum dolor sit</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut corporis delectus aliquid omnis nostrum, dignissimos eius ab enim. Aliquid, repellendus.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut corporis delectus aliquid omnis nostrum,
+        dignissimos eius ab enim. Aliquid, repellendus.</p>
       <span id="menu-button" class="menu-button">Menu</span>
       <div id="menu" class="menu">
-      <!-- <div class="menu -active"> -->
+        <!-- <div class="menu -active"> -->
         <div class="list">
           <div>Item 1</div>
           <div>Item 2</div>
@@ -35,21 +107,25 @@
       </div>
       <div class="accordion">
         <div class="item">
-        <!-- <div class="item -active"> -->
+          <!-- <div class="item -active"> -->
           <div class="title">Título 1</div>
-          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus, dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
+          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus,
+            dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
         </div>
         <div class="item">
           <div class="title">Título 2</div>
-          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus, dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
+          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus,
+            dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
         </div>
         <div class="item">
           <div class="title">Título 3</div>
-          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus, dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
+          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus,
+            dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
         </div>
         <div class="item">
           <div class="title">Título 4</div>
-          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus, dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
+          <div class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo corporis voluptatibus,
+            dicta minima consequatur delectus quia ex deserunt perspiciatis ratione.</div>
         </div>
       </div>
       <div id="wiki" class="wiki">
@@ -60,11 +136,35 @@
       </div>
     </div>
     <div class="modal-wiki">
-    <!-- <div class="modal-wiki -active"> -->
-      <span class="close-modal" id="close-modal">Fechar</span>
-      <img src="assets/img/albert-einstein.jpg" alt="Albert Einstein">
+      <div class="modal-wiki -active">
+        <span class="close-modal" id="close-modal">Fechar</span>
+        <img src="assets/img/albert-einstein.jpg" alt="Albert Einstein">
+      </div>
     </div>
-  </div>
-  <script src="assets/js/main.js" async></script>
+    <script src="assets/js/main.js" async></script>
+
+    <!-- < Abrir modal com a foto e fazer função no botão de fechar> -->
+    <script>
+      const buttonModal = document.getElementById("button-modal");
+      const modalWiki = document.getElementsByClassName("modal-wiki");
+      const closeModal = document.getElementById("close-modal");
+
+      buttonModal.addEventListener("click", function () {
+        console.log(modalWiki)
+        for (let i = 0; i <= modalWiki.length; i++) {
+          modalWiki[i].classList.remove("modal-wiki")
+          modalWiki[i].classList.add("modal-wiki-active")
+        }
+      });
+
+      closeModal.addEventListener("click", function () {
+        for (let i = 0; i <= modalWiki.length; i++) {
+          modalWiki[i].classList.remove("modal-wiki-active")
+          modalWiki[i].classList.add("modal-wiki")
+        }
+      })
+    </script>
+
 </body>
+
 </html>
