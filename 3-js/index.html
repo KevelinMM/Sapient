@@ -42,22 +42,23 @@
     document.addEventListener("DOMContentLoaded", function () {
       const videoCover = document.getElementById("video-cover");
       const videoPlayer = document.getElementById("video-player");
-
+  
       videoCover.addEventListener("click", function () {
         videoPlayer.setAttribute("src", "assets/video/video.mp4");
         videoPlayer.play();
         videoCover.classList.add("-inactive");
       });
-
+  
       videoPlayer.addEventListener("play", function () {
         videoCover.classList.add("-inactive");
       });
-
+  
       videoPlayer.addEventListener("pause", function () {
         videoCover.classList.remove("-inactive");
       });
     });
   </script>
+  
 
   <!-- <  Sistema de sanfona para a lista > -->
   <script>
@@ -150,7 +151,6 @@
       const closeModal = document.getElementById("close-modal");
 
       buttonModal.addEventListener("click", function () {
-        console.log(modalWiki)
         for (let i = 0; i <= modalWiki.length; i++) {
           modalWiki[i].classList.remove("modal-wiki")
           modalWiki[i].classList.add("modal-wiki-active")
